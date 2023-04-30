@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Circle
+  - Diamond
+  - Polygon
+  - Square
+  - Triangle
+  - Hexagon
   layers:
   - Default
   - TransparentFX
