@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainGameManager : MonoBehaviour
 {
-    bool isKey, coolTime;
+    bool isKey, coolTime, isFall;
 
     [SerializeField] GameObject[] obj;
     Rigidbody2D objBody0, objBody1, objBody2, objBody3, objBody4, objBody5;
@@ -31,13 +31,13 @@ public class MainGameManager : MonoBehaviour
 
         isKey = false;
         coolTime = false;
+        isFall = false;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Return) && !coolTime) {
+        if (!coolTime && isFall) {
             StartCoroutine("CoolTime");
-            isKey = true;
         }
         if(isKey) {
             ran = Random.Range(0, obj.Length);
@@ -48,7 +48,14 @@ public class MainGameManager : MonoBehaviour
 
     IEnumerator CoolTime() {
         coolTime = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
+        isKey = true;
+        isFall = false;
         coolTime = false;
+    }
+
+    public void IsFall()
+    {
+        isFall = true;
     }
 }

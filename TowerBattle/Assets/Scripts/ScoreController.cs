@@ -11,6 +11,7 @@ public class ScoreController : MonoBehaviour
 
     void Start()
     {
+        score = -100;
         normalUp = false;
         specialUp = false;
         scoreText.text = "0";
@@ -19,6 +20,11 @@ public class ScoreController : MonoBehaviour
     void Update()
     {
         scoreText.text = "" + score;
+
+        if(score <= 0)
+        {
+            scoreText.text = "0";
+        }
 
         if(normalUp) {
             score += 100;
@@ -29,5 +35,15 @@ public class ScoreController : MonoBehaviour
             score += 500;
             specialUp = false;
         }
+    }
+
+    public void NormalUp()
+    {
+        normalUp = true;
+    }
+
+    public void SpecialUp()
+    {
+        specialUp = true;
     }
 }
