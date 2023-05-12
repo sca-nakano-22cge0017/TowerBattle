@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5;
     Rigidbody2D rbody;
     Collider2D col;
-    bool isOver;
-    bool isCol, isMag;
+    bool isCol, isPlayable;
     public ScoreController scoreController;
     public MainGameManager mainGameManager;
     enum SCORE_STATE {BASIC, NORMAL, SPECIAL,}
@@ -21,9 +20,8 @@ public class PlayerController : MonoBehaviour
         rbody = this.GetComponent<Rigidbody2D>();
         col = this.GetComponent<Collider2D>();
         rbody.simulated = false;
-        isOver = false;
         isCol = false;
-        isMag = false;
+        isPlayable = true;
         time = 0f;
     }
 
@@ -32,7 +30,7 @@ public class PlayerController : MonoBehaviour
         Transform playerTransform = this.transform;
         Vector2 pos = playerTransform.position;
 
-        if(this.transform.position.y >= 3.5f) 
+        if(isPlayable) 
         {
             if(Input.GetKey(KeyCode.A)) {
                 pos.x -= moveSpeed * Time.deltaTime;
@@ -43,6 +41,7 @@ public class PlayerController : MonoBehaviour
                 playerTransform.position = pos;
             }
             if(Input.GetKeyDown(KeyCode.Return)) {
+                isPlayable = false;
                 rbody.simulated = true;
                 mainGameManager.IsFall();
                 StartCoroutine("scoreUp");
@@ -52,7 +51,6 @@ public class PlayerController : MonoBehaviour
         if (time >= 0.2f)
         {
             isCol = true;
-            isMag = true;
             time = 0f;
         }
         if (isCol)
@@ -77,7 +75,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if(this.transform.position.y <= -7.0f) {
-            isOver = true;
+            Destroy(gameObject);
         }
     }
 
@@ -96,17 +94,13 @@ public class PlayerController : MonoBehaviour
     }
 
     IEnumerator objDestroy() {
-        if(isMag)
+        if (this.gameObject.tag == "Circle" || this.gameObject.tag == "Square")
         {
-            if(this.gameObject.tag == "Circle" || this.gameObject.tag == "Square")
-            {
-                col.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
-            }
-            else
-            {
-                col.transform.localScale = new Vector3(1.56f, 1.56f, 1f);
-            }
-            isMag = false;
+            col.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
+        }
+        else
+        {
+            col.transform.localScale = new Vector3(1.56f, 1.56f, 1f);
         }
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
@@ -114,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator scoreUp()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
         scoreState = SCORE_STATE.NORMAL;
     }
 }
