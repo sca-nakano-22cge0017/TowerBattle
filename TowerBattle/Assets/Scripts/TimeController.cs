@@ -37,6 +37,7 @@ public class TimeController : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0f;
+            isWait = true;
         }
     }
 

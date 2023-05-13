@@ -12,6 +12,7 @@ TagManager:
   - Triangle
   - Hexagon
   - ScoreDown
+  - Vanish
   layers:
   - Default
   - TransparentFX

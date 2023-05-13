@@ -98,7 +98,6 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.tag == "ScoreDown")
         {
-            Debug.Log("scoredown");
             scoreController.ScoreDown();
             Destroy(gameObject);
         }
@@ -113,6 +112,7 @@ public class PlayerController : MonoBehaviour
         {
             col.transform.localScale = new Vector3(1.56f, 1.56f, 1f);
         }
+        this.gameObject.tag = "Vanish";
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
