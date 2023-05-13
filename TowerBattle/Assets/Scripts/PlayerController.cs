@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5;
     Rigidbody2D rbody;
     Collider2D col;
-    bool isCol, isPlayable;
+    bool isCol, isPlayable, isWait;
     public ScoreController scoreController;
     public MainGameManager mainGameManager;
+    public TimeController timeController;
     enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL,}
     SCORE_STATE scoreState = 0;
+    
     float time = 0;
 
     void Start()
@@ -27,10 +30,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        isWait = timeController.iswait;
+
         Transform playerTransform = this.transform;
         Vector2 pos = playerTransform.position;
 
-        if(isPlayable) 
+        if(isPlayable && !isWait) 
         {
             if(Input.GetKey(KeyCode.A)) {
                 pos.x -= moveSpeed * Time.deltaTime;
