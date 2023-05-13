@@ -19,7 +19,7 @@ public class ScoreController : MonoBehaviour
 
     void Update()
     {
-        scoreText.text = "" + score;
+        scoreText.text = "score" + score;
 
         if(score <= 0)
         {
