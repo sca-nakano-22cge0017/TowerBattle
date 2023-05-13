@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     bool isCol, isPlayable;
     public ScoreController scoreController;
     public MainGameManager mainGameManager;
-    enum SCORE_STATE {BASIC, NORMAL, SPECIAL,}
+    enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL,}
     SCORE_STATE scoreState = 0;
     float time = 0;
 
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
         switch (scoreState)
         {
-            case SCORE_STATE.BASIC:
+            case SCORE_STATE.BASIC: 
             break;
             case SCORE_STATE.NORMAL:
                 scoreController.NormalUp();
@@ -72,10 +72,6 @@ public class PlayerController : MonoBehaviour
                 scoreController.SpecialUp();
                 scoreState = SCORE_STATE.BASIC;
             break;
-        }
-
-        if(this.transform.position.y <= -7.0f) {
-            Destroy(gameObject);
         }
     }
 
@@ -90,6 +86,16 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == this.gameObject.tag)
         {
             time = 0f;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "ScoreDown")
+        {
+            Debug.Log("scoredown");
+            scoreController.ScoreDown();
+            Destroy(gameObject);
         }
     }
 

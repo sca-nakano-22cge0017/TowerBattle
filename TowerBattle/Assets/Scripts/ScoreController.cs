@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ScoreController : MonoBehaviour
 {
     [SerializeField] Text scoreText;
-    bool normalUp, specialUp;
+    bool normalUp, specialUp, scoreDown;
     int score;
 
     void Start()
@@ -14,16 +14,17 @@ public class ScoreController : MonoBehaviour
         score = -100;
         normalUp = false;
         specialUp = false;
+        scoreDown = false;
         scoreText.text = "0";
     }
 
     void Update()
     {
-        scoreText.text = "score" + score;
+        scoreText.text = "" + score;
 
         if(score <= 0)
         {
-            scoreText.text = "0";
+            scoreText.text =  "0";
         }
 
         if(normalUp) {
@@ -32,8 +33,14 @@ public class ScoreController : MonoBehaviour
         }
 
         if(specialUp) {
-            score += 500;
+            score += 250;
             specialUp = false;
+        }
+
+        if(scoreDown)
+        {
+            score -= 250;
+            scoreDown = false;
         }
     }
 
@@ -45,5 +52,11 @@ public class ScoreController : MonoBehaviour
     public void SpecialUp()
     {
         specialUp = true;
+    }
+
+    public void ScoreDown()
+    {
+        Debug.Log("減少");
+        scoreDown = true;
     }
 }
