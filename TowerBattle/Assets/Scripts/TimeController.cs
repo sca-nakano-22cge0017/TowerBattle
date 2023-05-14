@@ -10,7 +10,7 @@ public class TimeController : MonoBehaviour
     [SerializeField] float timeLimit;
     [SerializeField] Text countText;
     float timer;
-    enum TIME_STATE { WAIT = 0, PLAY, TIMEUP, }
+    enum TIME_STATE { WAIT = 0, PLAY, }
     TIME_STATE state = 0;
 
     bool isWait;
@@ -37,6 +37,7 @@ public class TimeController : MonoBehaviour
         if (timer <= 0)
         {
             timer = 0f;
+            timeText.text = "0";
             isWait = true;
         }
     }

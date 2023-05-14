@@ -624,6 +624,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 9215457447117932681, guid: 905c1ba937412d0418e03cf4f4b7ab78,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 905c1ba937412d0418e03cf4f4b7ab78, type: 3}
 --- !u!1001 &485203639
@@ -663,6 +668,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 850177386336705673, guid: b368f91f93eb9194088309251a392ba0,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     - target: {fileID: 3455176756885626736, guid: b368f91f93eb9194088309251a392ba0,
         type: 3}
       propertyPath: m_Name
@@ -751,6 +761,7 @@ GameObject:
   - component: {fileID: 485288465}
   - component: {fileID: 485288466}
   - component: {fileID: 485288467}
+  - component: {fileID: 485288468}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -806,6 +817,20 @@ MonoBehaviour:
   timeText: {fileID: 570772385}
   timeLimit: 60
   countText: {fileID: 1484233068}
+--- !u!114 &485288468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485288464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547e8df02f5e67f4ba6005c19db3239b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obj: {fileID: 2143294164}
+  timeController: {fileID: 485288467}
 --- !u!1001 &555747199
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -828,6 +853,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 2989903954718190845, guid: a7e6d7215094d7a449217fb6dd6a163a,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     - target: {fileID: 8299710923237635633, guid: a7e6d7215094d7a449217fb6dd6a163a,
         type: 3}
       propertyPath: m_Name
@@ -1160,6 +1190,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 8428870215291353210, guid: 584b5d1ce4f3a304eba6df9901ba186c,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 584b5d1ce4f3a304eba6df9901ba186c, type: 3}
 --- !u!1 &667773502
@@ -1711,6 +1746,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 5628520847433026521, guid: 44cf524699cfffb4aa46746407822a45,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44cf524699cfffb4aa46746407822a45, type: 3}
 --- !u!1 &1279055550
@@ -2257,6 +2297,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1787587306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1787587307}
+  - component: {fileID: 1787587308}
+  m_Layer: 0
+  m_Name: Judge
+  m_TagString: Judge
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1787587307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787587306}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_Children: []
+  m_Father: {fileID: 2143294168}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1787587308
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1787587306}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1001 &1841280833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2284,6 +2371,11 @@ PrefabInstance:
       propertyPath: scoreController
       value: 
       objectReference: {fileID: 700722263}
+    - target: {fileID: 2867625042760440456, guid: 2752e8ac77afb924a86fb5c930942776,
+        type: 3}
+      propertyPath: obstacleController
+      value: 
+      objectReference: {fileID: 2143294169}
     - target: {fileID: 6726269114069187696, guid: 2752e8ac77afb924a86fb5c930942776,
         type: 3}
       propertyPath: m_RootOrder
@@ -2489,6 +2581,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1879369695}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2143294168 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4509187291270711992, guid: 10322f92deb3ba5428c6f5700c91975f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1879369695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2143294169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2501,3 +2599,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e99747035148404b805ecd93527b5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreController: {fileID: 700722263}

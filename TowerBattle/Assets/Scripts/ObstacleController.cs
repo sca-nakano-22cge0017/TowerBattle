@@ -4,37 +4,51 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
-    int span = 10;
-    float x, y;
-    bool create;
+    public ScoreController scoreController;
+    [SerializeField] GameObject obj;
+    Collider2D col;
 
     void Start()
     {
-        create = true;
+        col = obj.GetComponent<Collider2D>();
+        col.enabled = false;
     }
 
     void Update()
     {
-        if(create)
-        {
-            StartCoroutine("Create");
-            create = false;
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Vanish")
         {
+            col.enabled = true;
+            scoreController.Erace();
+            StartCoroutine("objDestroy");
+            //Destroy(gameObject);
+        }
+
+        if(collision.gameObject.tag == "ScoreDown")
+        {
+            scoreController.ScoreDown();
             Destroy(gameObject);
         }
     }
 
-    IEnumerator Create()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        yield return new WaitForSeconds(span);
-        x = Random.Range(-3, 3);
-        y = Random.Range(-3.3f, 3);
-        Instantiate(this, new Vector3(x, y, 0), Quaternion.identity);
+        if (collision.gameObject.tag == "Vanish")
+        {
+            col.enabled = true;
+            scoreController.Erace();
+            StartCoroutine("objDestroy");
+            Destroy(gameObject);
+        }
+    }
+
+    IEnumerator objDestroy()
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

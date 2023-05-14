@@ -13,6 +13,7 @@ TagManager:
   - Hexagon
   - ScoreDown
   - Vanish
+  - Judge
   layers:
   - Default
   - TransparentFX

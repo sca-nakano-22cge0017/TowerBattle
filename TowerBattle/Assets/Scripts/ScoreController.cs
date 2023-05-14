@@ -7,14 +7,14 @@ public class ScoreController : MonoBehaviour
 {
     [SerializeField] Text scoreText;
     bool normalUp, specialUp, scoreDown;
+    enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL, ERACE, DOWN,}
+    SCORE_STATE scoreState = 0;
     int score;
 
     void Start()
     {
-        score = -100;
-        normalUp = false;
-        specialUp = false;
-        scoreDown = false;
+        //score = -100;
+        score = 0;
         scoreText.text = "0";
     }
 
@@ -27,36 +27,46 @@ public class ScoreController : MonoBehaviour
             scoreText.text =  "0";
         }
 
-        if(normalUp) {
-            score += 100;
-            normalUp = false;
-        }
-
-        if(specialUp) {
-            score += 250;
-            specialUp = false;
-        }
-
-        if(scoreDown)
+        switch(scoreState)
         {
-            score -= 250;
-            scoreDown = false;
+            case SCORE_STATE.BASIC:
+            break;
+            case SCORE_STATE.NORMAL:
+                score += 100;
+                scoreState = SCORE_STATE.BASIC;
+            break;
+            case SCORE_STATE.SPECIAL:
+                score += 250;
+                scoreState = SCORE_STATE.BASIC;
+            break;
+            case SCORE_STATE.ERACE:
+                score += 500;
+                scoreState = SCORE_STATE.BASIC;
+            break;
+            case SCORE_STATE.DOWN:
+                score -= 250;
+                scoreState = SCORE_STATE.BASIC;
+            break;
         }
     }
 
     public void NormalUp()
     {
-        normalUp = true;
+       scoreState = SCORE_STATE.NORMAL;
     }
 
     public void SpecialUp()
     {
-        specialUp = true;
+        scoreState = SCORE_STATE.SPECIAL;
+    }
+
+    public void Erace()
+    {
+        scoreState = SCORE_STATE.ERACE;
     }
 
     public void ScoreDown()
     {
-        Debug.Log("減少");
-        scoreDown = true;
+        scoreState = SCORE_STATE.DOWN;
     }
 }

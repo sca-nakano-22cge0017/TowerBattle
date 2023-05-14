@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 5;
     Rigidbody2D rbody;
     Collider2D col;
-    bool isCol, isPlayable, isWait;
+    bool isCol, isPlayable, isWait, isErace;
     public ScoreController scoreController;
     public MainGameManager mainGameManager;
     public TimeController timeController;
+    public ObstacleController obstacleController;
     enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL,}
     SCORE_STATE scoreState = 0;
     
@@ -49,15 +50,10 @@ public class PlayerController : MonoBehaviour
                 isPlayable = false;
                 rbody.simulated = true;
                 mainGameManager.IsFall();
-                StartCoroutine("scoreUp");
+                //StartCoroutine("scoreUp");
             }
         }
 
-        if (time >= 0.2f)
-        {
-            isCol = true;
-            time = 0f;
-        }
         if (isCol)
         {
             scoreState = SCORE_STATE.SPECIAL;
@@ -80,23 +76,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision) {
+    void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == this.gameObject.tag) {
-            time += Time.deltaTime;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == this.gameObject.tag)
-        {
-            time = 0f;
+            isCol = true;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "ScoreDown")
+        if (collision.gameObject.tag == "ScoreDown")
         {
             scoreController.ScoreDown();
             Destroy(gameObject);
@@ -117,9 +105,9 @@ public class PlayerController : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator scoreUp()
+    /*IEnumerator scoreUp()
     {
         yield return new WaitForSeconds(0.7f);
         scoreState = SCORE_STATE.NORMAL;
-    }
+    }*/
 }
