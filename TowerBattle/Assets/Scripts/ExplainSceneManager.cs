@@ -1,10 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class TitleSceneManager : MonoBehaviour
+public class ExplainSceneManager : MonoBehaviour
 {
     void Start()
     {
@@ -15,7 +14,7 @@ public class TitleSceneManager : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Return))
         {
-            SceneManager.LoadScene("ExplainScene");
+            SceneManager.LoadScene("MainScene");
         }
     }
 }

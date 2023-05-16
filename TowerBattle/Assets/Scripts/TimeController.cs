@@ -9,13 +9,14 @@ public class TimeController : MonoBehaviour
     [SerializeField] Text timeText;
     [SerializeField] float timeLimit;
     [SerializeField] Text countText;
+    [SerializeField] Text timeupText;
     float timer;
     enum TIME_STATE { WAIT = 0, PLAY, }
     TIME_STATE state = 0;
 
     bool isWait;
-
     public bool iswait => isWait;
+    public float Timer => timer;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class TimeController : MonoBehaviour
         timer = timeLimit;
         timeText.text = "" + timer.ToString("n2");
         StartCoroutine("CountDown");
+        timeupText.enabled = false;
     }
 
     void Update()
@@ -40,6 +42,12 @@ public class TimeController : MonoBehaviour
             timeText.text = "0";
             isWait = true;
         }
+
+        if(timer == 0)
+        {
+            timeupText.enabled = true;
+            StartCoroutine("Result");
+        }
     }
 
     IEnumerator CountDown()
@@ -55,5 +63,11 @@ public class TimeController : MonoBehaviour
         isWait = false;
         state = TIME_STATE.PLAY;
         yield break;
+    }
+
+    IEnumerator Result()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("ResultScene");
     }
 }

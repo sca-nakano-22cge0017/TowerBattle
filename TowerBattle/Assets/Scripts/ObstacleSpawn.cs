@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ObstacleSpawn : MonoBehaviour
 {
-    int span = 7;
-    float x;
+    int span;
+    float x, timer;
     [SerializeField] GameObject obj;
-    bool create, isSpan, isStop;
+    bool create, isSpan;
     public TimeController timeController;
 
     void Start()
     {
-        isStop = timeController.iswait;
+        timer = timeController.Timer;
         create = false;
     }
 
@@ -22,7 +22,8 @@ public class ObstacleSpawn : MonoBehaviour
         {
             StartCoroutine("Span");
         }
-        if(create && !isStop)
+        
+        if(create && timer != 0)
         {
             x = Random.Range(-3, 3);
             Instantiate(obj, new Vector3(x, -3.3f, 0), Quaternion.identity);
@@ -33,6 +34,7 @@ public class ObstacleSpawn : MonoBehaviour
     IEnumerator Span()
     {
         isSpan = true;
+        span = Random.Range(5, 10);
         yield return new WaitForSeconds(span);
         create = true;
         isSpan = false;

@@ -9,7 +9,7 @@ public class ScoreController : MonoBehaviour
     bool normalUp, specialUp, scoreDown;
     enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL, ERACE, DOWN,}
     SCORE_STATE scoreState = 0;
-    int score;
+    public static int score;
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class ScoreController : MonoBehaviour
                 scoreState = SCORE_STATE.BASIC;
             break;
             case SCORE_STATE.ERACE:
-                score += 500;
+                score += 100;
                 scoreState = SCORE_STATE.BASIC;
             break;
             case SCORE_STATE.DOWN:

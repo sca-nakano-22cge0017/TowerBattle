@@ -10,6 +10,7 @@ public class ObstacleController : MonoBehaviour
 
     void Start()
     {
+        obj.SetActive(false);
         col = obj.GetComponent<Collider2D>();
         col.enabled = false;
     }
@@ -22,10 +23,9 @@ public class ObstacleController : MonoBehaviour
     {
         if(collision.gameObject.tag == "Vanish")
         {
+            obj.SetActive(true);
             col.enabled = true;
-            scoreController.Erace();
             StartCoroutine("objDestroy");
-            //Destroy(gameObject);
         }
 
         if(collision.gameObject.tag == "ScoreDown")
@@ -39,8 +39,8 @@ public class ObstacleController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Vanish")
         {
+            obj.SetActive(true);
             col.enabled = true;
-            scoreController.Erace();
             StartCoroutine("objDestroy");
             Destroy(gameObject);
         }
