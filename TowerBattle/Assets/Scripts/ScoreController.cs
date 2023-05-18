@@ -48,6 +48,8 @@ public class ScoreController : MonoBehaviour
                 scoreState = SCORE_STATE.BASIC;
             break;
         }
+
+        PlayerPrefs.SetInt("Score", score);
     }
 
     public void NormalUp()

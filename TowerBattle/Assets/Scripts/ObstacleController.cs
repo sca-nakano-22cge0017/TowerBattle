@@ -41,14 +41,14 @@ public class ObstacleController : MonoBehaviour
         {
             obj.SetActive(true);
             col.enabled = true;
+            gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 0, 0);
             StartCoroutine("objDestroy");
-            Destroy(gameObject);
         }
     }
 
     IEnumerator objDestroy()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

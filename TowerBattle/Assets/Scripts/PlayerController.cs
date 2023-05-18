@@ -89,12 +89,15 @@ public class PlayerController : MonoBehaviour
             scoreController.ScoreDown();
             Destroy(gameObject);
         }
+    }
 
-        if(collision.gameObject.tag == "Judge")
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Judge")
         {
-            Debug.Log("col");
+            //Debug.Log("col");
             Destroy(gameObject);
-            //scoreController.Erace();
+            scoreController.Erace();
         }
     }
 
