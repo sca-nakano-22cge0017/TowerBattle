@@ -10,51 +10,51 @@ public class ResultManager : MonoBehaviour
     [SerializeField] Text No1, No2, No3, No4, No5;
     [SerializeField] GameObject NewRecord;
     int score, num;
-    int[] scoreRanking = new int[6];
-    bool x;
+    int[] scoreRank = new int[6];
+    bool check;
 
     void Start()
     {
-        x = true;
+        check = true;
         NewRecord.SetActive(false);
         score = PlayerPrefs.GetInt("Score", 0);
-        scoreRanking[0] = PlayerPrefs.GetInt("No1", 0);
-        scoreRanking[1] = PlayerPrefs.GetInt("No2", 0);
-        scoreRanking[2] = PlayerPrefs.GetInt("No3", 0);
-        scoreRanking[3] = PlayerPrefs.GetInt("No4", 0);
-        scoreRanking[4] = PlayerPrefs.GetInt("No5", 0);
-        scoreRanking[5] = PlayerPrefs.GetInt("No6", 0);
+        scoreRank[0] = PlayerPrefs.GetInt("No1", 0);
+        scoreRank[1] = PlayerPrefs.GetInt("No2", 0);
+        scoreRank[2] = PlayerPrefs.GetInt("No3", 0);
+        scoreRank[3] = PlayerPrefs.GetInt("No4", 0);
+        scoreRank[4] = PlayerPrefs.GetInt("No5", 0);
+        scoreRank[5] = PlayerPrefs.GetInt("No6", 0);
     }
 
     void Update()
     {
-        if(score >= scoreRanking[0])
+        if (check)
         {
-            NewRecord.SetActive(true);
-        }
+            if (score >= scoreRank[0])
+            {
+                NewRecord.SetActive(true);
+            }
 
-        scoreText.text = score + "";
+            scoreText.text = score + "";
 
-        if(x)
-        {
-            scoreRanking[5] = score;
-            System.Array.Sort(scoreRanking);
-            System.Array.Reverse(scoreRanking);
+            scoreRank[5] = score;
+            System.Array.Sort(scoreRank);
+            System.Array.Reverse(scoreRank);
 
-            No1.text = scoreRanking[0] + "";
-            No2.text = scoreRanking[1] + "";
-            No3.text = scoreRanking[2] + "";
-            No4.text = scoreRanking[3] + "";
-            No5.text = scoreRanking[4] + "";
+            No1.text = scoreRank[0] + "";
+            No2.text = scoreRank[1] + "";
+            No3.text = scoreRank[2] + "";
+            No4.text = scoreRank[3] + "";
+            No5.text = scoreRank[4] + "";
 
-            PlayerPrefs.SetInt("No1", scoreRanking[0]);
-            PlayerPrefs.SetInt("No2", scoreRanking[1]);
-            PlayerPrefs.SetInt("No3", scoreRanking[2]);
-            PlayerPrefs.SetInt("No4", scoreRanking[3]);
-            PlayerPrefs.SetInt("No5", scoreRanking[4]);
-            PlayerPrefs.SetInt("No6", scoreRanking[5]);
+            PlayerPrefs.SetInt("No1", scoreRank[0]);
+            PlayerPrefs.SetInt("No2", scoreRank[1]);
+            PlayerPrefs.SetInt("No3", scoreRank[2]);
+            PlayerPrefs.SetInt("No4", scoreRank[3]);
+            PlayerPrefs.SetInt("No5", scoreRank[4]);
+            PlayerPrefs.SetInt("No6", scoreRank[5]);
 
-            x = false;
+            check = false;
         }
 
         if(Input.GetKey(KeyCode.Return))
