@@ -32,19 +32,19 @@ public class ScoreController : MonoBehaviour
             case SCORE_STATE.BASIC:
             break;
             case SCORE_STATE.NORMAL:
-                score += 100;
+                score += 1000;
                 scoreState = SCORE_STATE.BASIC;
             break;
             case SCORE_STATE.SPECIAL:
-                score += 250;
+                score += 2500;
                 scoreState = SCORE_STATE.BASIC;
             break;
             case SCORE_STATE.ERACE:
-                score += 100;
+                score += 1000;
                 scoreState = SCORE_STATE.BASIC;
             break;
             case SCORE_STATE.DOWN:
-                score -= 250;
+                score -= 2500;
                 scoreState = SCORE_STATE.BASIC;
             break;
         }
