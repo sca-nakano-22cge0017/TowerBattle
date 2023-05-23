@@ -95,7 +95,6 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Judge")
         {
-            //Debug.Log("col");
             Destroy(gameObject);
             scoreController.Erace();
         }

@@ -11,11 +11,9 @@ public class ResultManager : MonoBehaviour
     [SerializeField] GameObject NewRecord;
     int score, num;
     int[] scoreRank = new int[6];
-    bool check;
 
     void Start()
     {
-        check = true;
         NewRecord.SetActive(false);
         score = PlayerPrefs.GetInt("Score", 0);
         scoreRank[0] = PlayerPrefs.GetInt("No1", 0);
@@ -24,39 +22,34 @@ public class ResultManager : MonoBehaviour
         scoreRank[3] = PlayerPrefs.GetInt("No4", 0);
         scoreRank[4] = PlayerPrefs.GetInt("No5", 0);
         scoreRank[5] = PlayerPrefs.GetInt("No6", 0);
+
+        if (score >= scoreRank[0])
+        {
+            NewRecord.SetActive(true);
+        }
+
+        scoreText.text = score + "";
+
+        scoreRank[5] = score;
+        System.Array.Sort(scoreRank);
+        System.Array.Reverse(scoreRank);
+
+        No1.text = scoreRank[0] + "";
+        No2.text = scoreRank[1] + "";
+        No3.text = scoreRank[2] + "";
+        No4.text = scoreRank[3] + "";
+        No5.text = scoreRank[4] + "";
+
+        PlayerPrefs.SetInt("No1", scoreRank[0]);
+        PlayerPrefs.SetInt("No2", scoreRank[1]);
+        PlayerPrefs.SetInt("No3", scoreRank[2]);
+        PlayerPrefs.SetInt("No4", scoreRank[3]);
+        PlayerPrefs.SetInt("No5", scoreRank[4]);
+        PlayerPrefs.SetInt("No6", scoreRank[5]);
     }
 
     void Update()
     {
-        if (check)
-        {
-            if (score >= scoreRank[0])
-            {
-                NewRecord.SetActive(true);
-            }
-
-            scoreText.text = score + "";
-
-            scoreRank[5] = score;
-            System.Array.Sort(scoreRank);
-            System.Array.Reverse(scoreRank);
-
-            No1.text = scoreRank[0] + "";
-            No2.text = scoreRank[1] + "";
-            No3.text = scoreRank[2] + "";
-            No4.text = scoreRank[3] + "";
-            No5.text = scoreRank[4] + "";
-
-            PlayerPrefs.SetInt("No1", scoreRank[0]);
-            PlayerPrefs.SetInt("No2", scoreRank[1]);
-            PlayerPrefs.SetInt("No3", scoreRank[2]);
-            PlayerPrefs.SetInt("No4", scoreRank[3]);
-            PlayerPrefs.SetInt("No5", scoreRank[4]);
-            PlayerPrefs.SetInt("No6", scoreRank[5]);
-
-            check = false;
-        }
-
         if(Input.GetKey(KeyCode.Return))
         {
             SceneManager.LoadScene("TitleScene");

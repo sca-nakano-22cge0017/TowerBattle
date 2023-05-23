@@ -21,13 +21,6 @@ public class ObstacleController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Vanish")
-        {
-            obj.SetActive(true);
-            col.enabled = true;
-            StartCoroutine("objDestroy");
-        }
-
         if(collision.gameObject.tag == "ScoreDown")
         {
             scoreController.ScoreDown();
