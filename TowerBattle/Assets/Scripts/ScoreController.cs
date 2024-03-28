@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// スコア制御
+/// </summary>
 public class ScoreController : MonoBehaviour
 {
     [SerializeField] Text scoreText;
-    bool normalUp, specialUp, scoreDown;
     enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL, ERACE, DOWN,}
     SCORE_STATE scoreState = 0;
     public static int score;
 
     void Start()
     {
-        //score = -100;
         score = 0;
         scoreText.text = "0";
     }
@@ -27,6 +28,7 @@ public class ScoreController : MonoBehaviour
             scoreText.text =  "0";
         }
 
+        //スコア増減
         switch(scoreState)
         {
             case SCORE_STATE.BASIC:

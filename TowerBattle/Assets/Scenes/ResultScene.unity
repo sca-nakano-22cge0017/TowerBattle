@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 628085174}
   - component: {fileID: 628085173}
   m_Layer: 5
-  m_Name: Score
+  m_Name: NowScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 1708472981}
   - component: {fileID: 1708472980}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Explain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,6 +1015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1778428111}
   - component: {fileID: 1778428110}
+  - component: {fileID: 1778428112}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1035,11 +1036,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 628085173}
-  No1: {fileID: 1274135770}
-  No2: {fileID: 1216051617}
-  No3: {fileID: 40825150}
-  No4: {fileID: 1424675732}
-  No5: {fileID: 964786988}
+  Ranking:
+  - {fileID: 1274135770}
+  - {fileID: 1216051617}
+  - {fileID: 40825150}
+  - {fileID: 1424675732}
+  - {fileID: 964786988}
   NewRecord: {fileID: 2014831162}
 --- !u!4 &1778428111
 Transform:
@@ -1055,6 +1057,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778428112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778428109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6212c6da580e54089284139280d292, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1791739878
 GameObject:
   m_ObjectHideFlags: 0

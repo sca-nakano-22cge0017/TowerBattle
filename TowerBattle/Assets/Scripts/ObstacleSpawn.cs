@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// îöíeê∂ê¨
+/// </summary>
 public class ObstacleSpawn : MonoBehaviour
 {
     int span;
-    float x, timer;
+    float xPos, timer;
     [SerializeField] GameObject obj;
     bool create, isSpan;
-    public TimeController timeController;
+
+    [SerializeField] int posMin = -3;
+    [SerializeField] int posMax = 3;
+    [SerializeField] int timeSpanMin = 5;
+    [SerializeField] int timeSpanMax = 10;
+
+    [SerializeField] TimeController timeController;
 
     void Start()
     {
@@ -25,17 +34,23 @@ public class ObstacleSpawn : MonoBehaviour
         
         if(create && timer != 0)
         {
-            x = Random.Range(-3, 3);
-            Instantiate(obj, new Vector3(x, -3.3f, 0), Quaternion.identity);
+            //ê∂ê¨
+            xPos = Random.Range(posMin, posMax);
+            Instantiate(obj, new Vector3(xPos, -3.3f, 0), Quaternion.identity);
             create = false;
         }
     }
 
+    /// <summary>
+    /// àÍíËä‘äuñàÇ…ê∂ê¨
+    /// </summary>
     IEnumerator Span()
     {
         isSpan = true;
-        span = Random.Range(5, 10);
+        span = Random.Range(timeSpanMin, timeSpanMax);
+
         yield return new WaitForSeconds(span);
+
         create = true;
         isSpan = false;
     }

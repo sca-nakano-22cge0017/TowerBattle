@@ -145,4 +145,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  scoreController: {fileID: 0}

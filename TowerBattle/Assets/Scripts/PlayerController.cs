@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5;
+    [SerializeField, Header("落下速度")] float moveSpeed = 5;
     Rigidbody2D rbody;
     Collider2D col;
-    bool isCol, isPlayable, isWait, isErace;
-    public ScoreController scoreController;
-    public MainGameManager mainGameManager;
-    public TimeController timeController;
-    public ObstacleController obstacleController;
+
+    bool isCol, isPlayable;
+
+    ScoreController scoreController;
+    MainGameManager mainGameManager;
+    TimeController timeController;
+
     enum SCORE_STATE {BASIC = 0, NORMAL, SPECIAL,}
     SCORE_STATE scoreState = 0;
     
@@ -21,22 +23,27 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        scoreController = GameObject.FindObjectOfType<ScoreController>();
+        mainGameManager = GameObject.FindObjectOfType<MainGameManager>();
+        timeController = GameObject.FindObjectOfType<TimeController>();
+
         rbody = this.GetComponent<Rigidbody2D>();
         col = this.GetComponent<Collider2D>();
+
         rbody.simulated = false;
         isCol = false;
         isPlayable = true;
+
         time = 0f;
     }
 
     void Update()
     {
-        isWait = timeController.iswait;
-
         Transform playerTransform = this.transform;
         Vector2 pos = playerTransform.position;
 
-        if(isPlayable && !isWait) 
+        //移動
+        if(isPlayable && !timeController.iswait) 
         {
             if(Input.GetKey(KeyCode.A)) {
                 pos.x -= moveSpeed * Time.deltaTime;
@@ -46,14 +53,16 @@ public class PlayerController : MonoBehaviour
                 pos.x += moveSpeed * Time.deltaTime;
                 playerTransform.position = pos;
             }
+
+            //エンターキーで落下
             if(Input.GetKeyDown(KeyCode.Return)) {
-                isPlayable = false;
+                isPlayable = false; //操作不可になる
                 rbody.simulated = true;
                 mainGameManager.IsFall();
-                //StartCoroutine("scoreUp");
             }
         }
 
+        //同じ図形に当たったら
         if (isCol)
         {
             scoreState = SCORE_STATE.SPECIAL;
@@ -61,6 +70,7 @@ public class PlayerController : MonoBehaviour
             isCol = false;
         }
 
+        //スコア増加処理
         switch (scoreState)
         {
             case SCORE_STATE.BASIC: 
@@ -77,6 +87,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
+        //同じタグのobject = 同じ図形に当たったら
         if(collision.gameObject.tag == this.gameObject.tag) {
             isCol = true;
         }
@@ -84,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //地面から落下したらスコア減少処理
         if (collision.gameObject.tag == "ScoreDown")
         {
             scoreController.ScoreDown();
@@ -93,6 +105,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        //爆弾の範囲内にあった場合消去
         if (collision.gameObject.tag == "Judge")
         {
             Destroy(gameObject);
@@ -100,7 +113,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 図形消去
+    /// </summary>
     IEnumerator objDestroy() {
+
+        //消えるときにサイズが大きくなる
         if (this.gameObject.tag == "Circle" || this.gameObject.tag == "Square")
         {
             col.transform.localScale = new Vector3(1.3f, 1.3f, 1f);
@@ -109,14 +127,11 @@ public class PlayerController : MonoBehaviour
         {
             col.transform.localScale = new Vector3(1.56f, 1.56f, 1f);
         }
+
+        //タグの変更　"Vanish"にObstacleが触れるとObstacleの周囲のオブジェクトが消える
         this.gameObject.tag = "Vanish";
+
         yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
-
-    /*IEnumerator scoreUp()
-    {
-        yield return new WaitForSeconds(0.7f);
-        scoreState = SCORE_STATE.NORMAL;
-    }*/
 }
